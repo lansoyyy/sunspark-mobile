@@ -23,8 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const AddReportPage()));
+            Navigator.of(context)
+                .push(MaterialPageRoute(builder: (context) => AddReportPage()));
           }),
       drawer: const DrawerWidget(),
       appBar: AppBar(
