@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunspark/screens/add_report_page.dart';
 import 'package:sunspark/widgets/drawer_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 
@@ -16,6 +17,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          child: const Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const AddReportPage()));
+          }),
       drawer: const DrawerWidget(),
       appBar: AppBar(
         centerTitle: true,
