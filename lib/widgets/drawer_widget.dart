@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sunspark/screens/home_screen.dart';
+import 'package:sunspark/screens/pages/policy_page.dart';
 import 'package:sunspark/screens/pages/profile_page.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 
@@ -86,7 +87,7 @@ class _MyDrawerState extends State<DrawerWidget> {
               ),
               onTap: () {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const HomeScreen()));
+                    builder: (context) => const PolicyPage()));
               },
             ),
             ListTile(
