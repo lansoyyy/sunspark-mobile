@@ -1,4 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/widgets/button_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 import 'package:sunspark/widgets/textfield_widget.dart';
@@ -33,8 +37,15 @@ class _AddReportPageState extends State<AddReportPage> {
     'Others'
   ];
 
+  bool check1 = false;
+  bool check2 = false;
+  bool check3 = false;
+
   String selected = 'Theft';
   var selectedDateTime = DateTime.now();
+
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
 
   @override
   Widget build(BuildContext context) {
@@ -155,6 +166,16 @@ class _AddReportPageState extends State<AddReportPage> {
                   color: Colors.black,
                   height: 200,
                   width: double.infinity,
+                  child: GoogleMap(
+                    mapType: MapType.normal,
+                    initialCameraPosition: const CameraPosition(
+                      target: LatLng(10.2477, 122.9888),
+                      zoom: 14.4746,
+                    ),
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -214,9 +235,11 @@ class _AddReportPageState extends State<AddReportPage> {
                 Row(
                   children: [
                     Checkbox(
-                      value: false,
+                      value: check1,
                       onChanged: (value) {
-                        setState(() {});
+                        setState(() {
+                          check1 = !check1;
+                        });
                       },
                     ),
                     const SizedBox(
@@ -231,9 +254,11 @@ class _AddReportPageState extends State<AddReportPage> {
                 Row(
                   children: [
                     Checkbox(
-                      value: false,
+                      value: check2,
                       onChanged: (value) {
-                        setState(() {});
+                        setState(() {
+                          check2 = !check2;
+                        });
                       },
                     ),
                     const SizedBox(
@@ -248,9 +273,11 @@ class _AddReportPageState extends State<AddReportPage> {
                 Row(
                   children: [
                     Checkbox(
-                      value: false,
+                      value: check3,
                       onChanged: (value) {
-                        setState(() {});
+                        setState(() {
+                          check3 = !check3;
+                        });
                       },
                     ),
                     const SizedBox(
@@ -265,38 +292,44 @@ class _AddReportPageState extends State<AddReportPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                Center(
-                    child: ButtonWidget(
-                        label: 'Add Report',
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                title: TextBold(
-                                    text: 'Alert',
-                                    fontSize: 18,
-                                    color: Colors.black),
-                                content: TextRegular(
-                                    text:
-                                        'Your report was succesfully submitted!',
-                                    fontSize: 14,
-                                    color: Colors.grey),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: TextRegular(
-                                        text: 'Close',
-                                        fontSize: 14,
+                check1 == false || check2 == false || check3 == false
+                    ? const SizedBox()
+                    : Center(
+                        child: ButtonWidget(
+                            label: 'Add Report',
+                            onPressed: () {
+                              showDialog(
+                                barrierDismissible: false,
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: TextBold(
+                                        text: 'Alert',
+                                        fontSize: 18,
                                         color: Colors.black),
-                                  ),
-                                ],
+                                    content: TextRegular(
+                                        text:
+                                            'Your report was succesfully submitted!',
+                                        fontSize: 14,
+                                        color: Colors.grey),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      const HomeScreen()));
+                                        },
+                                        child: TextRegular(
+                                            text: 'Close',
+                                            fontSize: 14,
+                                            color: Colors.black),
+                                      ),
+                                    ],
+                                  );
+                                },
                               );
-                            },
-                          );
-                        })),
+                            })),
                 const SizedBox(
                   height: 50,
                 ),

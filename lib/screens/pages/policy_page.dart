@@ -27,25 +27,25 @@ class PolicyPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              TextBold(text: 'Who we are', fontSize: 24, color: Colors.black),
+              TextBold(
+                  text: 'Legal and Policies',
+                  fontSize: 24,
+                  color: Colors.black),
               const SizedBox(
                 height: 10,
               ),
               TextRegular(
                   text:
-                      'At Algo Vision, we are a team of passionate student innovators based in Cagayan de Oro City, Philippines. Our mission is to provide top-notch software solutions to businesses and individuals who are seeking to streamline their processes and enhance their digital presence.\n\nWe believe that technology has the power to transform the world, and we are committed to creating innovative and user-friendly products that deliver value to our clients. Our team is composed of talented individuals with diverse backgrounds and skill sets, who are united by our shared passion for technology and innovation.\n\nAs a startup, we are agile and constantly evolving, always seeking to improve and stay ahead of the curve. We pride ourselves on our ability to listen to our clients needs and create customized solutions that meet their unique requirements.\n\nThank you for considering Algo Vision as your partner in digital transformation. We look forward to helping you achieve your goals through the power of technology.',
-                  fontSize: 14,
-                  color: Colors.grey),
-              const SizedBox(
-                height: 50,
-              ),
-              TextBold(text: 'What we do', fontSize: 24, color: Colors.black),
-              const SizedBox(
-                height: 10,
-              ),
-              TextRegular(
-                  text:
-                      'At Algo Vision, we specialize in providing innovative software solutions that empower businesses and individuals to thrive in the digital age. Our team of talented developers and designers work together to create custom software applications that are tailored to our clients unique needs and goals.\n\nWe offer a wide range of services, including but not limited to:\n\nSoftware development: We build software applications from scratch, using the latest tools and technologies to create scalable, secure, and user-friendly solutions.\n\nWeb development: We design and develop websites that are responsive, visually appealing, and optimized for search engines.\n\nMobile app development: We create native and hybrid mobile applications for iOS and Android, with a focus on delivering a seamless user experience.\n\nE-commerce solutions: We help businesses establish and grow their online presence by developing e-commerce platforms that are secure, efficient, and user-friendly.\n\nUI/UX design: We create intuitive and visually stunning user interfaces that enhance the overall user experience and drive engagement.\n\nAt Algo Vision, we are committed to delivering high-quality software solutions that meet our clients needs and exceed their expectations. We work closely with our clients throughout the development process to ensure that our solutions are aligned with their goals and objectives.\n\nContact us today to learn more about how we can help you leverage the power of technology to achieve your business goals.',
+                      'Velit veniam cillum deserunt ea non eu officia laborum velit ut labore reprehenderit ad. Dolor dolor non ad deserunt. Magna ex exercitation laboris esse proident minim irure. Est laboris cillum eiusmod cupidatat proident excepteur est velit sint eu. Sit mollit sunt incididunt laborum irure nulla ullamco mollit. Excepteur cillum sint cillum in consequat minim labore sit sit cillum.'
+                      'Ex labore do dolor consequat aute tempor nisi ex dolor adipisicing est mollit. Excepteur consectetur officia do ea quis do proident nulla est ea commodo nostrud sunt. Consectetur mollit in tempor ut. Voluptate proident cillum elit eiusmod.'
+                      'Mollit consectetur nulla velit exercitation nulla aliqua eiusmod officia consequat magna consectetur anim. Exercitation id officia ullamco commodo id sint ad. Aute aute sit quis ad adipisicing sunt nostrud occaecat voluptate cillum duis fugiat. Ut cillum minim deserunt id aliquip dolor elit enim deserunt mollit ad dolor. Proident labore est aliqua magna sit aliqua eiusmod nostrud in ea irure reprehenderit magna. Adipisicing cupidatat laboris amet velit.'
+                      'Magna consequat excepteur reprehenderit ad consequat in proident consectetur dolor. Irure sunt duis aliqua mollit aliqua sit cillum ea deserunt. Do magna esse ad officia dolore officia deserunt laborum elit quis ad veniam veniam. Nulla qui proident incididunt ipsum proident est laboris laboris do mollit nostrud fugiat. Ullamco qui nulla deserunt sit nulla veniam. Ullamco duis enim do exercitation commodo mollit irure quis. Lorem id voluptate exercitation et quis.'
+                      'Cupidatat occaecat pariatur tempor minim ut minim tempor ipsum ad id commodo ullamco. Ullamco nostrud in exercitation et. Adipisicing dolore nisi ea aliqua tempor aute aliquip amet duis eu.'
+                      'Excepteur nisi laboris aliquip et et. Est excepteur elit elit laboris consectetur cupidatat laboris qui fugiat aliqua occaecat id officia. Amet irure et Lorem anim sit dolor eu. Mollit duis consectetur nisi consequat cillum fugiat sint qui. Est sunt sunt irure est laboris do anim duis.'
+                      'Irure aliquip officia dolore est sunt cupidatat ut dolor. Irure proident sunt pariatur occaecat mollit duis laboris labore elit. Minim ut Lorem commodo laboris nostrud in adipisicing enim mollit in dolore.'
+                      'Consectetur anim excepteur aliqua enim. Sunt nostrud culpa non veniam do amet do ea incididunt eiusmod magna ut nostrud eiusmod. Dolor eu id sint id. Adipisicing occaecat enim minim id. Esse sunt culpa enim pariatur est veniam minim tempor pariatur esse esse ut. Ad cillum esse sit proident sunt velit veniam nisi tempor magna velit laborum consequat sit.'
+                      'Aliquip cupidatat nostrud incididunt commodo veniam nisi dolor esse labore. Nisi duis proident minim incididunt quis sit sit. Pariatur sint dolore aute amet quis magna deserunt officia sit culpa eu. Ipsum amet id incididunt qui anim laborum irure veniam excepteur deserunt ex laboris nulla ullamco. Id enim exercitation eu sint ex. Lorem veniam nostrud consectetur do eu Lorem voluptate officia pariatur anim irure nostrud sint labore. Quis minim enim nostrud voluptate fugiat.'
+                      'Ad non quis laboris exercitation et elit minim ea qui. Veniam in ullamco deserunt nulla reprehenderit reprehenderit non eiusmod. Est aute deserunt minim amet. Amet id mollit laborum in minim sunt. Cupidatat do anim adipisicing qui officia veniam deserunt tempor. Aliquip est labore ex exercitation duis officia mollit elit.',
                   fontSize: 14,
                   color: Colors.grey),
               const SizedBox(
