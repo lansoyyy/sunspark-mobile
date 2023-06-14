@@ -47,6 +47,8 @@ class _AddReportPageState extends State<AddReportPage> {
   final Completer<GoogleMapController> _controller =
       Completer<GoogleMapController>();
 
+  String selectedOption = '';
+
   @override
   Widget build(BuildContext context) {
     final formattedDateTime =
@@ -226,6 +228,60 @@ class _AddReportPageState extends State<AddReportPage> {
                       ),
                       label: TextRegular(
                           text: 'Camera', fontSize: 12, color: Colors.grey),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextRegular(
+                  text: 'Are you a resident of Nabua?',
+                  fontSize: 16,
+                  color: Colors.black,
+                ),
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    Radio<String>(
+                      value: 'Yes',
+                      groupValue: selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedOption = value!;
+                        });
+                      },
+                    ),
+                    const Text('Yes'),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Radio<String>(
+                      value: 'No',
+                      groupValue: selectedOption,
+                      onChanged: (value) {
+                        setState(() {
+                          selectedOption = value!;
+                        });
+                      },
+                    ),
+                    const Text('No'),
+                    const SizedBox(width: 8),
+                    Flexible(
+                      child: TextFormField(
+                        decoration: const InputDecoration(
+                            hintText: 'Please Specify',
+                            hintStyle: TextStyle(
+                              fontFamily: 'QRegular',
+                              color: Colors.black,
+                              fontSize: 12,
+                            )),
+                        onChanged: (value) {
+                          setState(() {
+                            selectedOption = 'No (please specify) $value';
+                          });
+                        },
+                      ),
                     ),
                   ],
                 ),
