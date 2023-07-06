@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunspark/screens/auth/landing_screen.dart';
 import 'package:sunspark/screens/home_screen.dart';
@@ -123,7 +124,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                               ),
                             ),
                             MaterialButton(
-                              onPressed: () {
+                              onPressed: () async {
+                                await FirebaseAuth.instance.signOut();
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (context) =>
