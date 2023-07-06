@@ -39,7 +39,9 @@ class LandingScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LoginScreen()));
+                          builder: (context) => LoginScreen(
+                                inUser: false,
+                              )));
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

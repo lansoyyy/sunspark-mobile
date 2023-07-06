@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:sunspark/screens/auth/signup_screen.dart';
 import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/widgets/button_widget.dart';
+import 'package:sunspark/widgets/text_widget.dart';
 import 'package:sunspark/widgets/textfield_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+  final bool? inUser;
 
-  LoginScreen({super.key});
+  LoginScreen({super.key, this.inUser = true});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class LoginScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(
-              'assets/images/police.jpg',
+              'assets/images/citizen.jpg',
               height: 150,
             ),
             const SizedBox(
@@ -39,6 +42,32 @@ class LoginScreen extends StatelessWidget {
                     builder: (context) => const HomeScreen()));
               },
             ),
+            const SizedBox(
+              height: 30,
+            ),
+            inUser!
+                ? Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextRegular(
+                        text: 'New to Carnab?',
+                        fontSize: 14,
+                        color: Colors.black,
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SignupScreen()));
+                        },
+                        child: TextBold(
+                          text: 'Register here',
+                          fontSize: 14,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ],
+                  )
+                : const SizedBox(),
           ],
         ),
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunspark/screens/auth/landing_screen.dart';
 import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/screens/pages/policy_page.dart';
 import 'package:sunspark/screens/pages/profile_page.dart';
@@ -126,7 +127,7 @@ class _MyDrawerState extends State<DrawerWidget> {
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const HomeScreen()));
+                                            const LandingScreen()));
                               },
                               child: const Text(
                                 'Continue',
