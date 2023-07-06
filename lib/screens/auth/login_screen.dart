@@ -1,9 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunspark/screens/auth/signup_screen.dart';
 import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/widgets/button_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 import 'package:sunspark/widgets/textfield_widget.dart';
+
+import '../../widgets/toast_widget.dart';
 
 class LoginScreen extends StatelessWidget {
   final emailController = TextEditingController();
@@ -38,8 +41,7 @@ class LoginScreen extends StatelessWidget {
             ButtonWidget(
               label: 'Login',
               onPressed: () {
-                Navigator.of(context).pushReplacement(MaterialPageRoute(
-                    builder: (context) => const HomeScreen()));
+                login(context);
               },
             ),
             const SizedBox(
@@ -72,5 +74,16 @@ class LoginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  login(context) async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text);
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomeScreen()));
+    } on Exception catch (e) {
+      showToast("An error occurred: $e");
+    }
   }
 }
