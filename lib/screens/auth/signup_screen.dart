@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunspark/screens/auth/login_screen.dart';
-import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/services/signup.dart';
 import 'package:sunspark/widgets/button_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
@@ -113,11 +112,10 @@ class SignupScreen extends StatelessWidget {
 
       addAccount(nameController.text, emailController.text, ageController.text,
           genderController.text, addressController.text);
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
+
       showToast("Registered Succesfully!");
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
+          MaterialPageRoute(builder: (context) => LoginScreen()));
     } on Exception catch (e) {
       showToast("An error occurred: $e");
     }

@@ -4,7 +4,9 @@ import 'package:sunspark/widgets/drawer_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final bool? inUser;
+
+  const HomeScreen({super.key, this.inUser = true});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -23,10 +25,12 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.white,
           ),
           onPressed: () {
-            Navigator.of(context)
-                .push(MaterialPageRoute(builder: (context) => AddReportPage()));
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (context) => const AddReportPage()));
           }),
-      drawer: const DrawerWidget(),
+      drawer: DrawerWidget(
+        inUser: widget.inUser,
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: TextRegular(

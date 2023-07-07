@@ -4,12 +4,16 @@ import '../../widgets/drawer_widget.dart';
 import '../../widgets/text_widget.dart';
 
 class PolicyPage extends StatelessWidget {
-  const PolicyPage({Key? key}) : super(key: key);
+  final bool? inUser;
+
+  const PolicyPage({super.key, this.inUser = true});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const DrawerWidget(),
+      drawer: DrawerWidget(
+        inUser: inUser,
+      ),
       appBar: AppBar(
         centerTitle: true,
         title: TextRegular(

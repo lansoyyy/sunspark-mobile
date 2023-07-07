@@ -9,7 +9,9 @@ import 'package:sunspark/widgets/textfield_widget.dart';
 import 'package:intl/intl.dart';
 
 class AddReportPage extends StatefulWidget {
-  const AddReportPage({super.key});
+  final bool? inUser;
+
+  const AddReportPage({super.key, this.inUser = true});
 
   @override
   State<AddReportPage> createState() => _AddReportPageState();
@@ -374,7 +376,9 @@ class _AddReportPageState extends State<AddReportPage> {
                                           Navigator.of(context).pushReplacement(
                                               MaterialPageRoute(
                                                   builder: (context) =>
-                                                      const HomeScreen()));
+                                                      HomeScreen(
+                                                        inUser: widget.inUser,
+                                                      )));
                                         },
                                         child: TextRegular(
                                             text: 'Close',

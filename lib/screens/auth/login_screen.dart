@@ -30,7 +30,9 @@ class LoginScreen extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            TextFieldWidget(label: 'Email', controller: emailController),
+            TextFieldWidget(
+                label: inUser! ? 'Email' : 'Username',
+                controller: emailController),
             const SizedBox(
               height: 10,
             ),
@@ -79,9 +81,14 @@ class LoginScreen extends StatelessWidget {
   login(context) async {
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
-      Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => const HomeScreen()));
+          email: inUser!
+              ? emailController.text
+              : '${emailController.text}@carnab.com',
+          password: passwordController.text);
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+          builder: (context) => HomeScreen(
+                inUser: inUser,
+              )));
     } on Exception catch (e) {
       showToast("An error occurred: $e");
     }
