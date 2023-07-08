@@ -11,10 +11,12 @@ class TextFieldWidget extends StatefulWidget {
   final int? maxLine;
   final TextInputType? inputType;
   final bool? isPassword;
+  final bool? enabled;
 
   TextFieldWidget(
       {super.key,
       required this.label,
+      this.enabled = true,
       this.hint = '',
       required this.controller,
       this.isObscure = false,
@@ -47,6 +49,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               ),
               borderRadius: BorderRadius.circular(5)),
           child: TextFormField(
+            enabled: widget.enabled,
             keyboardType: widget.inputType,
             decoration: InputDecoration(
               suffixIcon: widget.isPassword!

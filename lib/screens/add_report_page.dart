@@ -1,12 +1,18 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:sunspark/screens/home_screen.dart';
+import 'package:sunspark/services/add_report.dart';
 import 'package:sunspark/widgets/button_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 import 'package:sunspark/widgets/textfield_widget.dart';
 import 'package:intl/intl.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:path/path.dart' as path;
+import 'dart:io';
 
 class AddReportPage extends StatefulWidget {
   final bool? inUser;
@@ -50,6 +56,77 @@ class _AddReportPageState extends State<AddReportPage> {
       Completer<GoogleMapController>();
 
   String selectedOption = '';
+
+  late String fileName = '';
+
+  late File imageFile;
+
+  late String imageURL = '';
+
+  double lat = 0;
+  double long = 0;
+
+  Future<void> uploadPicture(String inputSource) async {
+    final picker = ImagePicker();
+    XFile pickedImage;
+    try {
+      pickedImage = (await picker.pickImage(
+          source: inputSource == 'camera'
+              ? ImageSource.camera
+              : ImageSource.gallery,
+          maxWidth: 1920))!;
+
+      fileName = path.basename(pickedImage.path);
+      imageFile = File(pickedImage.path);
+
+      try {
+        showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (BuildContext context) => Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
+            child: AlertDialog(
+                title: Row(
+              children: const [
+                CircularProgressIndicator(
+                  color: Colors.black,
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  'Loading . . .',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'QRegular'),
+                ),
+              ],
+            )),
+          ),
+        );
+
+        await firebase_storage.FirebaseStorage.instance
+            .ref('Evidences/$fileName')
+            .putFile(imageFile);
+        imageURL = await firebase_storage.FirebaseStorage.instance
+            .ref('Evidences/$fileName')
+            .getDownloadURL();
+
+        setState(() {});
+
+        Navigator.of(context).pop();
+      } on firebase_storage.FirebaseException catch (error) {
+        if (kDebugMode) {
+          print(error);
+        }
+      }
+    } catch (err) {
+      if (kDebugMode) {
+        print(err);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -171,6 +248,12 @@ class _AddReportPageState extends State<AddReportPage> {
                   height: 200,
                   width: double.infinity,
                   child: GoogleMap(
+                    onCameraMove: (position) {
+                      setState(() {
+                        lat = position.target.latitude;
+                        long = position.target.longitude;
+                      });
+                    },
                     mapType: MapType.normal,
                     initialCameraPosition: const CameraPosition(
                       target: LatLng(10.2477, 122.9888),
@@ -200,11 +283,20 @@ class _AddReportPageState extends State<AddReportPage> {
                 const SizedBox(
                   height: 10,
                 ),
-                Container(
-                  color: Colors.black,
-                  height: 100,
-                  width: double.infinity,
-                ),
+                imageURL != ''
+                    ? Container(
+                        decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: NetworkImage(imageURL), fit: BoxFit.cover),
+                        ),
+                        height: 100,
+                        width: double.infinity,
+                      )
+                    : Container(
+                        color: Colors.black,
+                        height: 100,
+                        width: double.infinity,
+                      ),
                 const SizedBox(
                   height: 5,
                 ),
@@ -212,7 +304,9 @@ class _AddReportPageState extends State<AddReportPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        uploadPicture('gallery');
+                      },
                       icon: const Icon(
                         Icons.file_upload,
                         color: Colors.black,
@@ -223,7 +317,9 @@ class _AddReportPageState extends State<AddReportPage> {
                           color: Colors.grey),
                     ),
                     TextButton.icon(
-                      onPressed: () {},
+                      onPressed: () {
+                        uploadPicture('camera');
+                      },
                       icon: const Icon(
                         Icons.camera,
                         color: Colors.black,
@@ -356,6 +452,17 @@ class _AddReportPageState extends State<AddReportPage> {
                         child: ButtonWidget(
                             label: 'Add Report',
                             onPressed: () {
+                              addReport(
+                                  nameController.text,
+                                  numberController.text,
+                                  addressController.text,
+                                  selected,
+                                  selectedDateTime,
+                                  lat,
+                                  long,
+                                  statementController.text,
+                                  imageURL,
+                                  selectedDateTime);
                               showDialog(
                                 barrierDismissible: false,
                                 context: context,
