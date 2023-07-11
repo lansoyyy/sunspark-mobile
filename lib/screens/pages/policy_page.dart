@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../widgets/drawer_widget.dart';
 import '../../widgets/text_widget.dart';
+import '../../widgets/user_drawer_widget.dart';
 
 class PolicyPage extends StatelessWidget {
   final bool? inUser;
@@ -11,9 +12,11 @@ class PolicyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerWidget(
-        inUser: inUser,
-      ),
+      drawer: inUser!
+          ? const UserDrawerWidget()
+          : DrawerWidget(
+              inUser: inUser,
+            ),
       appBar: AppBar(
         centerTitle: true,
         title: TextRegular(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sunspark/screens/auth/login_screen.dart';
+import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 
 class LandingScreen extends StatelessWidget {
@@ -64,7 +65,9 @@ class LandingScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => LoginScreen()));
+                          builder: (context) => const HomeScreen(
+                                inUser: true,
+                              )));
                     },
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,

@@ -6,6 +6,7 @@ import 'package:sunspark/screens/pages/details_page.dart';
 import 'package:sunspark/widgets/drawer_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 import 'package:intl/intl.dart' show DateFormat, toBeginningOfSentenceCase;
+import 'package:sunspark/widgets/user_drawer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool? inUser;
@@ -34,9 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     builder: (context) => const AddReportPage()));
               })
           : const SizedBox(),
-      drawer: DrawerWidget(
-        inUser: widget.inUser,
-      ),
+      drawer: widget.inUser!
+          ? const UserDrawerWidget()
+          : DrawerWidget(
+              inUser: widget.inUser,
+            ),
       appBar: AppBar(
         centerTitle: true,
         title: TextRegular(
