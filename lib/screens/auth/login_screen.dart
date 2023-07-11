@@ -20,59 +20,62 @@ class LoginScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(
-              'assets/images/citizen.jpg',
-              height: 150,
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-            TextFieldWidget(
-                label: inUser! ? 'Email' : 'Username',
-                controller: emailController),
-            const SizedBox(
-              height: 10,
-            ),
-            TextFieldWidget(label: 'Password', controller: passwordController),
-            const SizedBox(
-              height: 50,
-            ),
-            ButtonWidget(
-              label: 'Login',
-              onPressed: () {
-                login(context);
-              },
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-            inUser!
-                ? Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TextRegular(
-                        text: 'New to Carnab?',
-                        fontSize: 14,
-                        color: Colors.black,
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => SignupScreen()));
-                        },
-                        child: TextBold(
-                          text: 'Register here',
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                'assets/images/citizen.jpg',
+                height: 150,
+              ),
+              const SizedBox(
+                height: 50,
+              ),
+              TextFieldWidget(
+                  label: inUser! ? 'Email' : 'Username',
+                  controller: emailController),
+              const SizedBox(
+                height: 10,
+              ),
+              TextFieldWidget(
+                  label: 'Password', controller: passwordController),
+              const SizedBox(
+                height: 50,
+              ),
+              ButtonWidget(
+                label: 'Login',
+                onPressed: () {
+                  login(context);
+                },
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              inUser!
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        TextRegular(
+                          text: 'New to Carnab?',
                           fontSize: 14,
-                          color: Colors.blue,
+                          color: Colors.black,
                         ),
-                      ),
-                    ],
-                  )
-                : const SizedBox(),
-          ],
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => SignupScreen()));
+                          },
+                          child: TextBold(
+                            text: 'Register here',
+                            fontSize: 14,
+                            color: Colors.blue,
+                          ),
+                        ),
+                      ],
+                    )
+                  : const SizedBox(),
+            ],
+          ),
         ),
       ),
     );
