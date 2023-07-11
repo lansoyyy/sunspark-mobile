@@ -158,6 +158,8 @@ class _AddReportPageState extends State<AddReportPage> {
                   height: 10,
                 ),
                 TextFieldWidget(
+                    inputType: TextInputType.number,
+                    hint: '(ex. 9639530422)',
                     width: 350,
                     label: 'Phone Number',
                     controller: numberController),
