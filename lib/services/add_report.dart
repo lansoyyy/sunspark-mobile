@@ -17,6 +17,9 @@ Future addReport(name, contactNumber, address, type, dateAndTime, lat, long,
     "nabuaResident": nabuaResident,
     'dateTime': DateTime.now(),
     'id': docUser.id,
+    'year': DateTime.now().year,
+    'month': DateTime.now().month,
+    'day': DateTime.now().day,
   };
 
   await docUser.set(json);
