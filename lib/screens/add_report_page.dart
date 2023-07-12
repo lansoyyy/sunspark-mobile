@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_sms/flutter_sms.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sunspark/screens/home_screen.dart';
@@ -497,7 +498,9 @@ class _AddReportPageState extends State<AddReportPage> {
                                       long,
                                       statementController.text,
                                       imageURL,
-                                      selectedDateTime);
+                                      selectedOption);
+                                  _sendSMS(
+                                      'Incident: $selected\nReported by: ${nameController.text}\nReporter Contact Number: ${numberController.text}\nDate and Time: $selectedDateTime');
                                   showDialog(
                                     barrierDismissible: false,
                                     context: context,
@@ -543,6 +546,15 @@ class _AddReportPageState extends State<AddReportPage> {
             ),
           ),
         ));
+  }
+
+  void _sendSMS(String message) async {
+    String result =
+        await sendSMS(message: message, recipients: ['+639639530422'])
+            .catchError((onError) {
+      print(onError);
+    });
+    print(result);
   }
 
   Future<void> _selectDateTime(BuildContext context) async {
