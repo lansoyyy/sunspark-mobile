@@ -44,6 +44,7 @@ dependencies:
   firebase_auth:
   geolocator: ^9.0.2
   image_picker:
+  flutter_sms:
 
 dev_dependencies:
   flutter_test:
