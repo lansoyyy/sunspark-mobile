@@ -29,6 +29,17 @@ class LoginScreen extends StatelessWidget {
                 height: 150,
               ),
               const SizedBox(
+                height: 5,
+              ),
+              TextBold(
+                text: 'Police Officer Portal',
+                fontSize: 18,
+                color: Colors.black,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              const SizedBox(
                 height: 50,
               ),
               TextFieldWidget(
@@ -38,7 +49,10 @@ class LoginScreen extends StatelessWidget {
                 height: 10,
               ),
               TextFieldWidget(
-                  label: 'Password', controller: passwordController),
+                  isObscure: true,
+                  isPassword: true,
+                  label: 'Password',
+                  controller: passwordController),
               const SizedBox(
                 height: 50,
               ),
