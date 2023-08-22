@@ -138,7 +138,7 @@ class _AddReportPageState extends State<AddReportPage> {
     return Scaffold(
         appBar: AppBar(
           title: TextRegular(
-              text: 'Adding Report', fontSize: 18, color: Colors.white),
+              text: 'Report Incident', fontSize: 18, color: Colors.white),
           centerTitle: true,
         ),
         body: Padding(
@@ -280,26 +280,39 @@ class _AddReportPageState extends State<AddReportPage> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    color: Colors.black,
-                    height: 200,
-                    width: double.infinity,
-                    child: GoogleMap(
-                      onCameraMove: (position) {
-                        setState(() {
-                          lat = position.target.latitude;
-                          long = position.target.longitude;
-                        });
-                      },
-                      mapType: MapType.normal,
-                      initialCameraPosition: const CameraPosition(
-                        target: LatLng(10.2477, 122.9888),
-                        zoom: 14.4746,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      TextBold(
+                          text: 'Incident Location',
+                          fontSize: 14,
+                          color: Colors.black),
+                      const SizedBox(
+                        height: 5,
                       ),
-                      onMapCreated: (GoogleMapController controller) {
-                        _controller.complete(controller);
-                      },
-                    ),
+                      Container(
+                        color: Colors.black,
+                        height: 200,
+                        width: double.infinity,
+                        child: GoogleMap(
+                          myLocationButtonEnabled: true,
+                          onCameraMove: (position) {
+                            setState(() {
+                              lat = position.target.latitude;
+                              long = position.target.longitude;
+                            });
+                          },
+                          mapType: MapType.normal,
+                          initialCameraPosition: const CameraPosition(
+                            target: LatLng(10.2477, 122.9888),
+                            zoom: 14.4746,
+                          ),
+                          onMapCreated: (GoogleMapController controller) {
+                            _controller.complete(controller);
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 10,
@@ -403,23 +416,6 @@ class _AddReportPageState extends State<AddReportPage> {
                         },
                       ),
                       const Text('No'),
-                      const SizedBox(width: 8),
-                      Flexible(
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              hintText: 'Please Specify',
-                              hintStyle: TextStyle(
-                                fontFamily: 'QRegular',
-                                color: Colors.black,
-                                fontSize: 12,
-                              )),
-                          onChanged: (value) {
-                            setState(() {
-                              selectedOption = 'No (please specify) $value';
-                            });
-                          },
-                        ),
-                      ),
                     ],
                   ),
                   const SizedBox(
@@ -489,7 +485,7 @@ class _AddReportPageState extends State<AddReportPage> {
                       ? const SizedBox()
                       : Center(
                           child: ButtonWidget(
-                              label: 'Add Report',
+                              label: 'Submit Report',
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   addReport(
