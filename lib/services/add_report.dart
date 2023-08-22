@@ -20,6 +20,7 @@ Future addReport(name, contactNumber, address, type, dateAndTime, lat, long,
     'year': DateTime.now().year,
     'month': DateTime.now().month,
     'day': DateTime.now().day,
+    'status': 'Processing'
   };
 
   await docUser.set(json);

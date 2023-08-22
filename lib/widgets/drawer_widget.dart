@@ -86,6 +86,20 @@ class _MyDrawerState extends State<DrawerWidget> {
                     },
                   ),
                   ListTile(
+                    leading: const Icon(Icons.report),
+                    title: TextBold(
+                      text: 'Reports',
+                      fontSize: 12,
+                      color: Colors.black,
+                    ),
+                    onTap: () {
+                      // Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      //     builder: (context) => HomeScreen(
+                      //           inUser: widget.inUser,
+                      //         )));
+                    },
+                  ),
+                  ListTile(
                     leading: const Icon(Icons.account_circle_outlined),
                     title: TextBold(
                       text: 'Profile',

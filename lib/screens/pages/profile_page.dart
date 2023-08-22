@@ -69,6 +69,18 @@ class ProfilePage extends StatelessWidget {
                     height: 20,
                   ),
                   TextBold(
+                      text: 'Police Officer 1',
+                      fontSize: 18,
+                      color: Colors.black),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  TextRegular(
+                      text: 'Position', fontSize: 12, color: Colors.grey),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextBold(
                       text: data['age'], fontSize: 18, color: Colors.black),
                   const SizedBox(
                     height: 5,

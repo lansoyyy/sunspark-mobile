@@ -47,6 +47,19 @@ class _HomeScreenState extends State<HomeScreen> {
           fontSize: 18,
           color: Colors.white,
         ),
+        actions: [
+          Badge(
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            label: TextRegular(text: '1', fontSize: 14, color: Colors.white),
+            child: IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.notifications,
+              ),
+            ),
+          ),
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.only(left: 20, right: 20),

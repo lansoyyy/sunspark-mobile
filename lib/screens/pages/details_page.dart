@@ -84,6 +84,36 @@ class _DetailsPageState extends State<DetailsPage> {
                       const SizedBox(
                         height: 10,
                       ),
+                      TextBold(
+                        text: 'Resident of Nabua?',
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                      const SizedBox(height: 8),
+                      Row(
+                        children: [
+                          Icon(
+                            data['nabuaResident'] == 'Yes'
+                                ? Icons.radio_button_checked_sharp
+                                : Icons.radio_button_off,
+                          ),
+                          const Text('Yes'),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Icon(
+                            data['nabuaResident'] != 'Yes'
+                                ? Icons.radio_button_checked_sharp
+                                : Icons.radio_button_off,
+                          ),
+                          const Text('No'),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       TextFieldWidget(
                           enabled: false,
                           hint: data['address'],
@@ -150,20 +180,32 @@ class _DetailsPageState extends State<DetailsPage> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        color: Colors.black,
-                        height: 200,
-                        width: double.infinity,
-                        child: GoogleMap(
-                          mapType: MapType.normal,
-                          initialCameraPosition: CameraPosition(
-                            target: LatLng(data['lat'], data['long']),
-                            zoom: 14.4746,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          TextBold(
+                              text: 'Incident Location',
+                              fontSize: 14,
+                              color: Colors.black),
+                          const SizedBox(
+                            height: 5,
                           ),
-                          onMapCreated: (GoogleMapController controller) {
-                            _controller.complete(controller);
-                          },
-                        ),
+                          Container(
+                            color: Colors.black,
+                            height: 200,
+                            width: double.infinity,
+                            child: GoogleMap(
+                              mapType: MapType.normal,
+                              initialCameraPosition: CameraPosition(
+                                target: LatLng(data['lat'], data['long']),
+                                zoom: 14.4746,
+                              ),
+                              onMapCreated: (GoogleMapController controller) {
+                                _controller.complete(controller);
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                       const SizedBox(
                         height: 10,
@@ -194,6 +236,74 @@ class _DetailsPageState extends State<DetailsPage> {
                         ),
                         height: 100,
                         width: double.infinity,
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextBold(
+                        text: 'Report Progress',
+                        fontSize: 16,
+                        color: Colors.black,
+                      ),
+                      const SizedBox(height: 8),
+                      GestureDetector(
+                        onTap: () async {
+                          await FirebaseFirestore.instance
+                              .collection('Reports')
+                              .doc(data.id)
+                              .update({'status': 'Processing'});
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              data['status'] == 'Processing'
+                                  ? Icons.radio_button_checked_sharp
+                                  : Icons.radio_button_off,
+                            ),
+                            const Text('Processing'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      GestureDetector(
+                        onTap: () async {
+                          await FirebaseFirestore.instance
+                              .collection('Reports')
+                              .doc(data.id)
+                              .update({'status': 'Resolved'});
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              data['status'] == 'Resolved'
+                                  ? Icons.radio_button_checked_sharp
+                                  : Icons.radio_button_off,
+                            ),
+                            const Text('No'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      GestureDetector(
+                        onTap: () async {
+                          await FirebaseFirestore.instance
+                              .collection('Reports')
+                              .doc(data.id)
+                              .update({'status': 'Unresolved'});
+                        },
+                        child: Row(
+                          children: [
+                            Icon(
+                              data['status'] == 'Unresolved'
+                                  ? Icons.radio_button_checked_sharp
+                                  : Icons.radio_button_off,
+                            ),
+                            const Text('No'),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10,
                       ),
                       const SizedBox(
                         height: 50,
