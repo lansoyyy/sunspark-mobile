@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sunspark/widgets/text_widget.dart';
 
 class TextFieldWidget extends StatefulWidget {
   final String label;
@@ -13,6 +12,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool? isPassword;
   final bool? enabled;
   final String? Function(String?)? validator;
+  final bool? isRequred;
 
   TextFieldWidget({
     super.key,
@@ -25,6 +25,7 @@ class TextFieldWidget extends StatefulWidget {
     this.height = 60,
     this.maxLine = 1,
     this.isPassword = false,
+    this.isRequred = false,
     this.inputType = TextInputType.text,
     this.validator,
   });
@@ -39,7 +40,40 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        TextRegular(text: widget.label, fontSize: 12, color: Colors.black),
+        RichText(
+          text: TextSpan(
+            children: [
+              TextSpan(
+                text: widget.label,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontFamily: 'Bold',
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              widget.isRequred!
+                  ? const TextSpan(
+                      text: '*',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontFamily: 'Bold',
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  : const TextSpan(
+                      text: '',
+                      style: TextStyle(
+                        fontSize: 0,
+                        fontFamily: 'Bold',
+                        color: Colors.red,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+            ],
+          ),
+        ),
         const SizedBox(
           height: 5,
         ),

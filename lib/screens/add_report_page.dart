@@ -158,6 +158,7 @@ class _AddReportPageState extends State<AddReportPage> {
                     height: 10,
                   ),
                   TextFieldWidget(
+                    isRequred: true,
                     width: 350,
                     label: 'Name',
                     controller: nameController,
@@ -172,6 +173,7 @@ class _AddReportPageState extends State<AddReportPage> {
                     height: 10,
                   ),
                   TextFieldWidget(
+                    isRequred: true,
                     inputType: TextInputType.number,
                     hint: '(ex. 9639530422)',
                     width: 350,
@@ -191,6 +193,7 @@ class _AddReportPageState extends State<AddReportPage> {
                     height: 10,
                   ),
                   TextFieldWidget(
+                    isRequred: true,
                     width: 350,
                     label: 'Address',
                     controller: addressController,
@@ -302,6 +305,7 @@ class _AddReportPageState extends State<AddReportPage> {
                     height: 10,
                   ),
                   TextFieldWidget(
+                      isRequred: true,
                       width: 350,
                       height: 50,
                       label: 'Statement',
