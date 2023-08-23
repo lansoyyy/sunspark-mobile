@@ -5,6 +5,7 @@ import 'package:sunspark/screens/auth/landing_screen.dart';
 import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/screens/pages/policy_page.dart';
 import 'package:sunspark/screens/pages/profile_page.dart';
+import 'package:sunspark/screens/pages/reports_page.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 
 class DrawerWidget extends StatefulWidget {
@@ -93,10 +94,8 @@ class _MyDrawerState extends State<DrawerWidget> {
                       color: Colors.black,
                     ),
                     onTap: () {
-                      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      //     builder: (context) => HomeScreen(
-                      //           inUser: widget.inUser,
-                      //         )));
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const ReportsPage()));
                     },
                   ),
                   ListTile(

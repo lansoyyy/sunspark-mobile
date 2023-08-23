@@ -6,8 +6,6 @@ import 'package:flutter_sms/flutter_sms.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sunspark/screens/auth/landing_screen.dart';
-import 'package:sunspark/screens/auth/login_screen.dart';
-import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/services/add_report.dart';
 import 'package:sunspark/widgets/button_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
@@ -47,12 +45,12 @@ class _AddReportPageState extends State<AddReportPage> {
     'Road Accident',
     'Others'
   ];
+  String selected = 'Theft';
 
   bool check1 = false;
   bool check2 = false;
   bool check3 = false;
 
-  String selected = 'Theft';
   var selectedDateTime = DateTime.now();
 
   final Completer<GoogleMapController> _controller =
