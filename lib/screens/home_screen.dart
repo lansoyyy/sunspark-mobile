@@ -57,7 +57,34 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Badge(
               backgroundColor: Colors.red,
               textColor: Colors.white,
-              label: TextRegular(text: '1', fontSize: 14, color: Colors.white),
+              label: StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('Reports')
+                      .where('status', isNotEqualTo: 'Resolved')
+                      .snapshots(),
+                  builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.hasError) {
+                      print(snapshot.error);
+                      return const Center(child: Text('Error'));
+                    }
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      print('waiting');
+                      return const Padding(
+                        padding: EdgeInsets.only(top: 50),
+                        child: Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.black,
+                        )),
+                      );
+                    }
+
+                    final data = snapshot.requireData;
+                    return TextRegular(
+                        text: data.docs.length.toString(),
+                        fontSize: 14,
+                        color: Colors.white);
+                  }),
               child: const Icon(
                 Icons.notifications,
               ),
