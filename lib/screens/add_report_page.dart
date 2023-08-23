@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_sms/flutter_sms.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:sunspark/screens/auth/landing_screen.dart';
+import 'package:sunspark/screens/auth/login_screen.dart';
 import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/services/add_report.dart';
 import 'package:sunspark/widgets/button_widget.dart';
@@ -485,7 +487,7 @@ class _AddReportPageState extends State<AddReportPage> {
                       ? const SizedBox()
                       : Center(
                           child: ButtonWidget(
-                              label: 'Submit Report',
+                              label: 'Submit Reports',
                               onPressed: () {
                                 if (_formKey.currentState!.validate()) {
                                   addReport(
@@ -518,14 +520,10 @@ class _AddReportPageState extends State<AddReportPage> {
                                         actions: [
                                           TextButton(
                                             onPressed: () {
-                                              Navigator.of(context)
-                                                  .pushReplacement(
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              HomeScreen(
-                                                                inUser: widget
-                                                                    .inUser,
-                                                              )));
+                                              Navigator.of(context).pushReplacement(
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          const LandingScreen()));
                                             },
                                             child: TextRegular(
                                                 text: 'Close',

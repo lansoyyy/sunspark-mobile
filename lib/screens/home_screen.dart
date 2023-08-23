@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sunspark/screens/add_report_page.dart';
 import 'package:sunspark/screens/pages/details_page.dart';
+import 'package:sunspark/screens/pages/notif_page.dart';
 import 'package:sunspark/widgets/drawer_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 import 'package:intl/intl.dart' show DateFormat, toBeginningOfSentenceCase;
@@ -48,13 +49,16 @@ class _HomeScreenState extends State<HomeScreen> {
           color: Colors.white,
         ),
         actions: [
-          Badge(
-            backgroundColor: Colors.red,
-            textColor: Colors.white,
-            label: TextRegular(text: '1', fontSize: 14, color: Colors.white),
-            child: IconButton(
-              onPressed: () {},
-              icon: const Icon(
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const NotifScreen()));
+            },
+            icon: Badge(
+              backgroundColor: Colors.red,
+              textColor: Colors.white,
+              label: TextRegular(text: '1', fontSize: 14, color: Colors.white),
+              child: const Icon(
                 Icons.notifications,
               ),
             ),
@@ -150,23 +154,56 @@ class _HomeScreenState extends State<HomeScreen> {
                                           )));
                                 }
                               },
-                              child: Card(
-                                elevation: 3,
-                                child: ListTile(
-                                  title: TextBold(
-                                      text: data.docs[index]['type'],
-                                      fontSize: 18,
-                                      color: Colors.black),
-                                  subtitle: TextRegular(
-                                      text: data.docs[index]['statement'],
-                                      fontSize: 12,
-                                      color: Colors.grey),
-                                  trailing: TextRegular(
-                                      text: DateFormat.yMMMd().add_jm().format(
-                                          data.docs[index]['dateAndTime']
-                                              .toDate()),
-                                      fontSize: 14,
-                                      color: Colors.black),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: data.docs[index]['status'] ==
+                                          'Processing'
+                                      ? Colors.blue
+                                      : data.docs[index]['status'] == 'Resolved'
+                                          ? Colors.green
+                                          : Colors.red,
+                                ),
+                                child: Card(
+                                  elevation: 3,
+                                  child: ListTile(
+                                    title: TextBold(
+                                        text: data.docs[index]['type'],
+                                        fontSize: 18,
+                                        color: Colors.black),
+                                    subtitle: TextRegular(
+                                        text: data.docs[index]['statement'],
+                                        fontSize: 12,
+                                        color: Colors.grey),
+                                    trailing: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        TextRegular(
+                                            text: DateFormat.yMMMd()
+                                                .add_jm()
+                                                .format(data.docs[index]
+                                                        ['dateAndTime']
+                                                    .toDate()),
+                                            fontSize: 14,
+                                            color: Colors.black),
+                                        const SizedBox(
+                                          height: 5,
+                                        ),
+                                        TextBold(
+                                            text: data.docs[index]['status'],
+                                            fontSize: 12,
+                                            color: data.docs[index]['status'] ==
+                                                    'Processing'
+                                                ? Colors.blue
+                                                : data.docs[index]['status'] ==
+                                                        'Resolved'
+                                                    ? Colors.green
+                                                    : Colors.red),
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

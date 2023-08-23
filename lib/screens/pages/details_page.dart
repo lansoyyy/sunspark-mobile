@@ -279,7 +279,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ? Icons.radio_button_checked_sharp
                                   : Icons.radio_button_off,
                             ),
-                            const Text('No'),
+                            const Text('Resolved'),
                           ],
                         ),
                       ),
@@ -298,7 +298,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   ? Icons.radio_button_checked_sharp
                                   : Icons.radio_button_off,
                             ),
-                            const Text('No'),
+                            const Text('Unresolved'),
                           ],
                         ),
                       ),
