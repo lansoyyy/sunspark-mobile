@@ -165,6 +165,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
 
                   final data = snapshot.requireData;
+                  
                   return Expanded(
                     child: SizedBox(
                       child: ListView.builder(
@@ -219,7 +220,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                           height: 5,
                                         ),
                                         TextBold(
-                                            text: data.docs[index]['status'],
+                                            text: data.docs[index]['status']  ==
+                                                    'Processing' ? 'New' : data.docs[index]['status'],
                                             fontSize: 12,
                                             color: data.docs[index]['status'] ==
                                                     'Processing'

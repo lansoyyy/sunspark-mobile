@@ -43,7 +43,7 @@ class _NotifScreenState extends State<NotifScreen> {
             StreamBuilder<QuerySnapshot>(
                 stream: FirebaseFirestore.instance
                     .collection('Reports')
-                    .orderBy('dateTime', descending: true)
+                    .where('status', isEqualTo: 'Processing')
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -108,7 +108,10 @@ class _NotifScreenState extends State<NotifScreen> {
                                         height: 5,
                                       ),
                                       TextBold(
-                                          text: data.docs[index]['status'],
+                                          text: data.docs[index]['status'] ==
+                                                  'Processing'
+                                              ? 'New'
+                                              : data.docs[index]['status'],
                                           fontSize: 10,
                                           color: data.docs[index]['status'] ==
                                                   'Processing'
