@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
               label: StreamBuilder<QuerySnapshot>(
                   stream: FirebaseFirestore.instance
                       .collection('Reports')
-                      .where('status', isNotEqualTo: 'Resolved')
+                      .where('status', isEqualTo: 'Processing')
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
