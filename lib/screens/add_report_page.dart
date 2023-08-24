@@ -84,11 +84,11 @@ class _AddReportPageState extends State<AddReportPage> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context) => Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
+          builder: (BuildContext context) => const Padding(
+            padding: EdgeInsets.only(left: 30, right: 30),
             child: AlertDialog(
                 title: Row(
-              children: const [
+              children: [
                 CircularProgressIndicator(
                   color: Colors.black,
                 ),
@@ -545,9 +545,9 @@ class _AddReportPageState extends State<AddReportPage> {
   }
 
   void _sendSMS(String message) async {
-    String result =
-        await sendSMS(message: message, recipients: ['+639639530422'])
-            .catchError((onError) {
+    String result = await sendSMS(
+            message: message, recipients: ['+639639530422'], sendDirect: true)
+        .catchError((onError) {
       print(onError);
     });
     print(result);
