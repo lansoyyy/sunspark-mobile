@@ -84,11 +84,11 @@ class _AddReportPageState extends State<AddReportPage> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context) => Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
+          builder: (BuildContext context) => const Padding(
+            padding: EdgeInsets.only(left: 30, right: 30),
             child: AlertDialog(
                 title: Row(
-              children: const [
+              children: [
                 CircularProgressIndicator(
                   color: Colors.black,
                 ),
@@ -332,6 +332,7 @@ class _AddReportPageState extends State<AddReportPage> {
                         height: 200,
                         width: double.infinity,
                         child: GoogleMap(
+                          myLocationEnabled: true,
                           myLocationButtonEnabled: true,
                           onCameraMove: (position) {
                             setState(() {

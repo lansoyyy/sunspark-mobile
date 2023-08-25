@@ -138,110 +138,114 @@ class _HomeScreenState extends State<HomeScreen> {
               height: 10,
             ),
             StreamBuilder<QuerySnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection('Reports')
-                    .where('type',
-                        isGreaterThanOrEqualTo:
-                            toBeginningOfSentenceCase(nameSearched))
-                    .where('type',
-                        isLessThan:
-                            '${toBeginningOfSentenceCase(nameSearched)}z')
-                    .snapshots(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<QuerySnapshot> snapshot) {
-                  if (snapshot.hasError) {
-                    print(snapshot.error);
-                    return const Center(child: Text('Error'));
-                  }
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    print('waiting');
-                    return const Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      child: Center(
-                          child: CircularProgressIndicator(
+              stream: FirebaseFirestore.instance
+                  .collection('Reports')
+                  .where('type',
+                      isGreaterThanOrEqualTo:
+                          toBeginningOfSentenceCase(nameSearched))
+                  .where('type',
+                      isLessThan: '${toBeginningOfSentenceCase(nameSearched)}z')
+                  .snapshots(),
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                if (snapshot.hasError) {
+                  print(snapshot.error);
+                  return const Center(child: Text('Error'));
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  print('waiting');
+                  return const Padding(
+                    padding: EdgeInsets.only(top: 50),
+                    child: Center(
+                      child: CircularProgressIndicator(
                         color: Colors.black,
-                      )),
-                    );
-                  }
+                      ),
+                    ),
+                  );
+                }
 
-                  final data = snapshot.requireData;
-                  
-                  return Expanded(
-                    child: SizedBox(
-                      child: ListView.builder(
-                        itemCount: data.docs.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(top: 5, bottom: 5),
-                            child: GestureDetector(
-                              onTap: () {
-                                if (widget.inUser! == false) {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (context) => DetailsPage(
-                                            reportId: data.docs[index].id,
-                                          )));
-                                }
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: data.docs[index]['status'] ==
-                                          'Processing'
-                                      ? Colors.blue
-                                      : data.docs[index]['status'] == 'Resolved'
-                                          ? Colors.green
-                                          : Colors.red,
-                                ),
-                                child: Card(
-                                  elevation: 3,
-                                  child: ListTile(
-                                    title: TextBold(
-                                        text: data.docs[index]['type'],
-                                        fontSize: 18,
-                                        color: Colors.black),
-                                    subtitle: TextRegular(
-                                        text: data.docs[index]['statement'],
+                final data = snapshot.requireData;
+
+                return Expanded(
+                  child: SizedBox(
+                    child: ListView.builder(
+                      itemCount: data.docs.length,
+                      itemBuilder: (context, index) {
+                        final document = data.docs[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 5, bottom: 5),
+                          child: GestureDetector(
+                            onTap: () {
+                              if (widget.inUser! == false) {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => DetailsPage(
+                                    reportId: document.id,
+                                  ),
+                                ));
+                              }
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: document['status'] == 'Processing'
+                                    ? Colors.blue
+                                    : document['status'] == 'Resolved'
+                                        ? Colors.green
+                                        : Colors.red,
+                              ),
+                              child: Card(
+                                elevation: 3,
+                                child: ListTile(
+                                  title: TextBold(
+                                    text: document['type'],
+                                    fontSize: 18,
+                                    color: Colors.black,
+                                  ),
+                                  subtitle: TextRegular(
+                                    text: document['statement'],
+                                    fontSize: 12,
+                                    color: Colors.grey,
+                                  ),
+                                  trailing: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      TextRegular(
+                                        text: DateFormat.yMMMd()
+                                            .add_jm()
+                                            .format(document['dateAndTime']
+                                                .toDate()),
+                                        fontSize: 14,
+                                        color: Colors.black,
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      TextBold(
+                                        text: document['status'] == 'Processing'
+                                            ? 'New'
+                                            : document['status'],
                                         fontSize: 12,
-                                        color: Colors.grey),
-                                    trailing: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        TextRegular(
-                                            text: DateFormat.yMMMd()
-                                                .add_jm()
-                                                .format(data.docs[index]
-                                                        ['dateAndTime']
-                                                    .toDate()),
-                                            fontSize: 14,
-                                            color: Colors.black),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
-                                        TextBold(
-                                            text: data.docs[index]['status']  ==
-                                                    'Processing' ? 'New' : data.docs[index]['status'],
-                                            fontSize: 12,
-                                            color: data.docs[index]['status'] ==
-                                                    'Processing'
-                                                ? Colors.blue
-                                                : data.docs[index]['status'] ==
-                                                        'Resolved'
-                                                    ? Colors.green
-                                                    : Colors.red),
-                                      ],
-                                    ),
+                                        color: document['status'] ==
+                                                'Processing'
+                                            ? Colors.blue
+                                            : document['status'] == 'Resolved'
+                                                ? Colors.green
+                                                : Colors.red,
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
                             ),
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                })
+                  ),
+                );
+              },
+            )
           ],
         ),
       ),
