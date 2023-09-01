@@ -123,11 +123,11 @@ class _AddReportPageState extends State<AddReportPage> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context) => const Padding(
-            padding: EdgeInsets.only(left: 30, right: 30),
+          builder: (BuildContext context) => Padding(
+            padding: const EdgeInsets.only(left: 30, right: 30),
             child: AlertDialog(
                 title: Row(
-              children: [
+              children: const [
                 CircularProgressIndicator(
                   color: Colors.black,
                 ),
