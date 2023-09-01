@@ -40,6 +40,7 @@ class _AddReportPageState extends State<AddReportPage> {
   final addressController = TextEditingController();
 
   final statementController = TextEditingController();
+  final othersController = TextEditingController();
 
   List<String> type1 = [
     'Theft',
@@ -78,6 +79,7 @@ class _AddReportPageState extends State<AddReportPage> {
   double long = 0;
 
   bool hasLoaded = false;
+  String others = '';
 
   addMarker() {
     Geolocator.getCurrentPosition().then((position) {
@@ -123,11 +125,11 @@ class _AddReportPageState extends State<AddReportPage> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context) => Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
+          builder: (BuildContext context) => const Padding(
+            padding: EdgeInsets.only(left: 30, right: 30),
             child: AlertDialog(
                 title: Row(
-              children: const [
+              children: [
                 CircularProgressIndicator(
                   color: Colors.black,
                 ),
@@ -336,6 +338,17 @@ class _AddReportPageState extends State<AddReportPage> {
                             },
                           ),
                         ),
+                        SizedBox(
+                          height: selected == 'Others' ? 20 : 0,
+                        ),
+                        selected == 'Others'
+                            ? TextFieldWidget(
+                                isRequred: true,
+                                width: 350,
+                                height: 50,
+                                label: 'Please specify',
+                                controller: othersController)
+                            : const SizedBox(),
                         const SizedBox(
                           height: 10,
                         ),
@@ -536,7 +549,9 @@ class _AddReportPageState extends State<AddReportPage> {
                                             nameController.text,
                                             numberController.text,
                                             addressController.text,
-                                            selected,
+                                            selected == 'Others'
+                                                ? othersController.text
+                                                : selected,
                                             selectedDateTime,
                                             lat,
                                             long,
