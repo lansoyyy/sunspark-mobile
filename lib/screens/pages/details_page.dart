@@ -221,22 +221,26 @@ class _DetailsPageState extends State<DetailsPage> {
                         height: 20,
                       ),
                       TextBold(
-                        text: 'Evidence (photo)',
+                        text: 'Evidences (photo)',
                         fontSize: 18,
                         color: Colors.black,
                       ),
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(data['evidencePhoto']),
-                              fit: BoxFit.cover),
+                      for (int i = 0; i < data['evidencePhoto'].length; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 2.5, bottom: 2.5),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: NetworkImage(data['evidencePhoto'][i]),
+                                  fit: BoxFit.cover),
+                            ),
+                            height: 100,
+                            width: double.infinity,
+                          ),
                         ),
-                        height: 100,
-                        width: double.infinity,
-                      ),
                       const SizedBox(
                         height: 10,
                       ),

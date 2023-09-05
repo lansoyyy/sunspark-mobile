@@ -16,6 +16,8 @@ import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:path/path.dart' as path;
 import 'dart:io';
 
+import 'package:sunspark/widgets/toast_widget.dart';
+
 class AddReportPage extends StatefulWidget {
   final bool? inUser;
 
@@ -108,6 +110,8 @@ class _AddReportPageState extends State<AddReportPage> {
     });
   }
 
+  List evidences = [];
+
   Future<void> uploadPicture(String inputSource) async {
     final picker = ImagePicker();
     XFile pickedImage;
@@ -154,6 +158,10 @@ class _AddReportPageState extends State<AddReportPage> {
         imageURL = await firebase_storage.FirebaseStorage.instance
             .ref('Evidences/$fileName')
             .getDownloadURL();
+
+        evidences.add(imageURL);
+        showToast(
+            '${evidences.length} images are uploaded. You can upload multiple images');
 
         setState(() {});
 
@@ -556,7 +564,7 @@ class _AddReportPageState extends State<AddReportPage> {
                                             lat,
                                             long,
                                             statementController.text,
-                                            imageURL,
+                                            evidences,
                                             selectedOption);
                                         _sendSMS(
                                             'Incident: $selected\nReported by: ${nameController.text}\nReporter Contact Number: ${numberController.text}\nDate and Time: $selectedDateTime');
