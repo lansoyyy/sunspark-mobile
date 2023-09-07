@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:sunspark/screens/add_report_page.dart';
+import 'package:sunspark/screens/home_screen.dart';
 import 'package:sunspark/widgets/button_widget.dart';
 
 import '../widgets/text_widget.dart';
 
 class CitizenScreen extends StatefulWidget {
-  const CitizenScreen({super.key});
+  final bool? inUser;
+
+  const CitizenScreen({super.key, this.inUser = true});
 
   @override
   State<CitizenScreen> createState() => _CitizenScreenState();
@@ -86,10 +88,11 @@ class _CitizenScreenState extends State<CitizenScreen> {
                       child: ButtonWidget(
                           label: 'Continue',
                           onPressed: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const AddReportPage()));
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                                    builder: (context) => HomeScreen(
+                                          inUser: widget.inUser,
+                                        )));
                           }))
                   : const SizedBox(),
               const SizedBox(
