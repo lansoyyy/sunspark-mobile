@@ -32,9 +32,17 @@ class LandingScreen extends StatelessWidget {
                 color: Colors.grey,
               ),
               const SizedBox(
-                height: 75,
+                height: 30,
               ),
-              Row(
+              TextRegular(
+                text: 'Login as',
+                fontSize: 14,
+                color: Colors.black,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   GestureDetector(
@@ -61,6 +69,9 @@ class LandingScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 50,
                   ),
                   GestureDetector(
                     onTap: () {
