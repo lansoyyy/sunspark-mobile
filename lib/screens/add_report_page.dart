@@ -18,6 +18,8 @@ import 'dart:io';
 
 import 'package:sunspark/widgets/toast_widget.dart';
 
+import 'citizen_screen.dart';
+
 class AddReportPage extends StatefulWidget {
   final bool? inUser;
 
@@ -63,6 +65,7 @@ class _AddReportPageState extends State<AddReportPage> {
   bool check1 = false;
   bool check2 = false;
   bool check3 = false;
+  bool check4 = false;
 
   var selectedDateTime = DateTime.now();
 
@@ -129,11 +132,11 @@ class _AddReportPageState extends State<AddReportPage> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context) => Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
+          builder: (BuildContext context) => const Padding(
+            padding: EdgeInsets.only(left: 30, right: 30),
             child: AlertDialog(
                 title: Row(
-              children: const [
+              children: [
                 CircularProgressIndicator(
                   color: Colors.black,
                 ),
@@ -543,10 +546,38 @@ class _AddReportPageState extends State<AddReportPage> {
                             ),
                           ],
                         ),
+                        Row(
+                          children: [
+                            Checkbox(
+                              value: check4,
+                              onChanged: (value) {
+                                setState(() {
+                                  check4 = !check4;
+                                });
+                              },
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const CitizenScreen(
+                                          inUser: true,
+                                        )));
+                              },
+                              child: TextBold(
+                                text: 'I agree with terms and conditions',
+                                fontSize: 14,
+                                color: Colors.blue,
+                              ),
+                            ),
+                          ],
+                        ),
                         const SizedBox(
                           height: 20,
                         ),
-                        check1 == false || check2 == false || check3 == false
+                        check1 == false ||
+                                check2 == false ||
+                                check3 == false ||
+                                check4 == false
                             ? const SizedBox()
                             : Center(
                                 child: ButtonWidget(
@@ -617,9 +648,9 @@ class _AddReportPageState extends State<AddReportPage> {
   }
 
   void _sendSMS(String message) async {
-    String result = await sendSMS(
-            message: message, recipients: ['+639615381873'], sendDirect: true)
-        .catchError((onError) {
+    String result =
+        await sendSMS(message: message, recipients: ['+639615381873'])
+            .catchError((onError) {
       print(onError);
     });
     print(result);
