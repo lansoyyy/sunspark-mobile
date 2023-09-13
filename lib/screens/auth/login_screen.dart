@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunspark/screens/auth/signup_screen.dart';
-import 'package:sunspark/screens/home_screen.dart';
+import 'package:sunspark/screens/mewhome_screen.dart';
 import 'package:sunspark/widgets/button_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 import 'package:sunspark/widgets/textfield_widget.dart';
@@ -103,7 +103,7 @@ class LoginScreen extends StatelessWidget {
               : '${emailController.text}@carnab.com',
           password: passwordController.text);
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => HomeScreen(
+          builder: (context) => NewHomeScreen(
                 inUser: inUser,
               )));
     } on FirebaseAuthException catch (e) {

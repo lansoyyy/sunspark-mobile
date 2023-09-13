@@ -58,6 +58,7 @@ class _MyDrawerState extends State<UserDrawerWidget> {
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (context) => HomeScreen(
                           inUser: widget.inUser,
+                          inTypes: true,
                         )));
               },
             ),

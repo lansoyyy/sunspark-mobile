@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sunspark/screens/auth/landing_screen.dart';
-import 'package:sunspark/screens/home_screen.dart';
+import 'package:sunspark/screens/mewhome_screen.dart';
 import 'package:sunspark/screens/pages/policy_page.dart';
 import 'package:sunspark/screens/pages/profile_page.dart';
 import 'package:sunspark/screens/pages/reports_page.dart';
@@ -81,7 +81,7 @@ class _MyDrawerState extends State<DrawerWidget> {
                     ),
                     onTap: () {
                       Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => HomeScreen(
+                          builder: (context) => NewHomeScreen(
                                 inUser: widget.inUser,
                               )));
                     },

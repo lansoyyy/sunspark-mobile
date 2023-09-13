@@ -4,15 +4,16 @@ import 'package:intl/intl.dart';
 import 'package:sunspark/screens/add_report_page.dart';
 import 'package:sunspark/screens/pages/details_page.dart';
 import 'package:sunspark/screens/pages/notif_page.dart';
-import 'package:sunspark/widgets/drawer_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
 import 'package:intl/intl.dart' show DateFormat, toBeginningOfSentenceCase;
-import 'package:sunspark/widgets/user_drawer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   final bool? inUser;
+  final bool? inTypes;
+  final String? filter;
 
-  const HomeScreen({super.key, this.inUser = true});
+  const HomeScreen(
+      {super.key, this.inUser = true, required this.inTypes, this.filter = ''});
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -38,11 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       builder: (context) => const AddReportPage()));
                 })
             : const SizedBox(),
-        drawer: widget.inUser!
-            ? const UserDrawerWidget()
-            : DrawerWidget(
-                inUser: widget.inUser,
-              ),
         appBar: AppBar(
           centerTitle: true,
           title: TextRegular(
@@ -102,25 +98,27 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TabBar(
-                labelColor: Colors.black,
-                unselectedLabelColor: Colors.grey,
-                labelStyle: TextStyle(
-                  fontFamily: 'Bold',
-                  color: Colors.black,
-                ),
-                tabs: [
-                  Tab(
-                    text: 'New',
-                  ),
-                  Tab(
-                    text: 'Unresolved',
-                  ),
-                  Tab(
-                    text: 'Resolved',
-                  ),
-                ],
-              ),
+              widget.inTypes!
+                  ? const TabBar(
+                      labelColor: Colors.black,
+                      unselectedLabelColor: Colors.grey,
+                      labelStyle: TextStyle(
+                        fontFamily: 'Bold',
+                        color: Colors.black,
+                      ),
+                      tabs: [
+                        Tab(
+                          text: 'New',
+                        ),
+                        Tab(
+                          text: 'Unresolved',
+                        ),
+                        Tab(
+                          text: 'Resolved',
+                        ),
+                      ],
+                    )
+                  : const SizedBox(),
               const SizedBox(
                 height: 20,
               ),
@@ -161,13 +159,15 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Expanded(
-                child: TabBarView(children: [
-                  stream('Processing'),
-                  stream('Unresolved'),
-                  stream('Resolved'),
-                ]),
-              )
+              widget.inTypes!
+                  ? Expanded(
+                      child: TabBarView(children: [
+                        stream('Processing'),
+                        stream('Unresolved'),
+                        stream('Resolved'),
+                      ]),
+                    )
+                  : Expanded(child: stream(widget.filter!)),
             ],
           ),
         ),
@@ -177,14 +177,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget stream(String filter) {
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance
-          .collection('Reports')
-          .where('type',
-              isGreaterThanOrEqualTo: toBeginningOfSentenceCase(nameSearched))
-          .where('type',
-              isLessThan: '${toBeginningOfSentenceCase(nameSearched)}z')
-          .where('status', isEqualTo: filter)
-          .snapshots(),
+      stream: widget.inTypes!
+          ? FirebaseFirestore.instance
+              .collection('Reports')
+              .where('type',
+                  isGreaterThanOrEqualTo:
+                      toBeginningOfSentenceCase(nameSearched))
+              .where('type',
+                  isLessThan: '${toBeginningOfSentenceCase(nameSearched)}z')
+              .where('status', isEqualTo: filter)
+              .where('type', isEqualTo: widget.filter)
+              .snapshots()
+          : FirebaseFirestore.instance
+              .collection('Reports')
+              .where('type',
+                  isGreaterThanOrEqualTo:
+                      toBeginningOfSentenceCase(nameSearched))
+              .where('type',
+                  isLessThan: '${toBeginningOfSentenceCase(nameSearched)}z')
+              .where('status', isEqualTo: widget.filter)
+              .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (snapshot.hasError) {
           print(snapshot.error);

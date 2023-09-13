@@ -91,6 +91,7 @@ class _CitizenScreenState extends State<CitizenScreen> {
                             Navigator.of(context)
                                 .pushReplacement(MaterialPageRoute(
                                     builder: (context) => HomeScreen(
+                                          inTypes: true,
                                           inUser: widget.inUser,
                                         )));
                           }))

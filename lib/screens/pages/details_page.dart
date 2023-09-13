@@ -28,12 +28,26 @@ class _DetailsPageState extends State<DetailsPage> {
 
   String selectedOption = '';
 
+  Set<Marker> markers = {};
+
+  addMarker(double lat, double long) {
+    markers.add(
+      Marker(
+        draggable: false,
+        icon: BitmapDescriptor.defaultMarker,
+        markerId: const MarkerId('my location'),
+        position: LatLng(lat, long),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final Stream<DocumentSnapshot> userData = FirebaseFirestore.instance
         .collection('Reports')
         .doc(widget.reportId)
         .snapshots();
+
     return Scaffold(
         appBar: AppBar(
           title: TextRegular(
@@ -55,6 +69,10 @@ class _DetailsPageState extends State<DetailsPage> {
                     return const Center(child: CircularProgressIndicator());
                   }
                   dynamic data = snapshot.data;
+
+                  if (markers.isEmpty) {
+                    addMarker(data['lat'], data['long']);
+                  }
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -195,6 +213,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             height: 200,
                             width: double.infinity,
                             child: GoogleMap(
+                              markers: markers,
                               mapType: MapType.normal,
                               initialCameraPosition: CameraPosition(
                                 target: LatLng(data['lat'], data['long']),
