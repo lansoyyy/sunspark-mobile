@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sunspark/screens/home_screen.dart';
-import 'package:sunspark/widgets/button_widget.dart';
 
 import '../widgets/text_widget.dart';
 
@@ -60,42 +58,6 @@ class _CitizenScreenState extends State<CitizenScreen> {
               const SizedBox(
                 height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Checkbox(
-                    value: check1,
-                    onChanged: (value) {
-                      setState(() {
-                        check1 = !check1;
-                      });
-                    },
-                  ),
-                  const SizedBox(
-                    width: 300,
-                    child: Text(
-                      'I agree to the legal and policies',
-                      style: TextStyle(fontFamily: 'QRegular'),
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              check1
-                  ? Center(
-                      child: ButtonWidget(
-                          label: 'Continue',
-                          onPressed: () {
-                            Navigator.of(context)
-                                .pushReplacement(MaterialPageRoute(
-                                    builder: (context) => HomeScreen(
-                                          inTypes: true,
-                                          inUser: widget.inUser,
-                                        )));
-                          }))
-                  : const SizedBox(),
               const SizedBox(
                 height: 30,
               ),

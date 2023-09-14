@@ -73,6 +73,14 @@ class LandingScreen extends StatelessWidget {
                   const SizedBox(
                     height: 50,
                   ),
+                  TextRegular(
+                    text: 'Report as',
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
