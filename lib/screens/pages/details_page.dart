@@ -271,10 +271,12 @@ class _DetailsPageState extends State<DetailsPage> {
                       const SizedBox(height: 8),
                       GestureDetector(
                         onTap: () async {
-                          await FirebaseFirestore.instance
-                              .collection('Reports')
-                              .doc(data.id)
-                              .update({'status': 'Processing'});
+                          if (data['status'] != 'Resolved') {
+                            await FirebaseFirestore.instance
+                                .collection('Reports')
+                                .doc(data.id)
+                                .update({'status': 'Processing'});
+                          }
                         },
                         child: Row(
                           children: [
@@ -290,10 +292,12 @@ class _DetailsPageState extends State<DetailsPage> {
                       const SizedBox(height: 10),
                       GestureDetector(
                         onTap: () async {
-                          await FirebaseFirestore.instance
-                              .collection('Reports')
-                              .doc(data.id)
-                              .update({'status': 'Resolved'});
+                          if (data['status'] != 'Resolved') {
+                            await FirebaseFirestore.instance
+                                .collection('Reports')
+                                .doc(data.id)
+                                .update({'status': 'Resolved'});
+                          }
                         },
                         child: Row(
                           children: [
@@ -309,10 +313,12 @@ class _DetailsPageState extends State<DetailsPage> {
                       const SizedBox(height: 10),
                       GestureDetector(
                         onTap: () async {
-                          await FirebaseFirestore.instance
-                              .collection('Reports')
-                              .doc(data.id)
-                              .update({'status': 'Unresolved'});
+                          if (data['status'] != 'Resolved') {
+                            await FirebaseFirestore.instance
+                                .collection('Reports')
+                                .doc(data.id)
+                                .update({'status': 'Unresolved'});
+                          }
                         },
                         child: Row(
                           children: [
