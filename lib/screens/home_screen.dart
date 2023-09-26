@@ -226,14 +226,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 padding: const EdgeInsets.only(top: 5, bottom: 5),
                 child: GestureDetector(
                   onTap: () {
-                    if (document['status'] != 'Resolved') {
-                      if (widget.inUser! == false) {
-                        Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => DetailsPage(
-                            reportId: document.id,
-                          ),
-                        ));
-                      }
+                    if (widget.inUser! == false) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => DetailsPage(
+                          reportId: document.id,
+                        ),
+                      ));
                     }
                   },
                   child: Container(
