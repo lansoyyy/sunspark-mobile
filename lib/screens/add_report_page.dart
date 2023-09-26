@@ -648,9 +648,9 @@ class _AddReportPageState extends State<AddReportPage> {
   }
 
   void _sendSMS(String message) async {
-    String result =
-        await sendSMS(message: message, recipients: ['+639615381873'])
-            .catchError((onError) {
+    String result = await sendSMS(
+            message: message, recipients: ['+639615381873'], sendDirect: true)
+        .catchError((onError) {
       print(onError);
     });
     print(result);
