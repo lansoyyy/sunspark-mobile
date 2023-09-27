@@ -132,11 +132,11 @@ class _AddReportPageState extends State<AddReportPage> {
         showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (BuildContext context) => Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30),
+          builder: (BuildContext context) => const Padding(
+            padding: EdgeInsets.only(left: 30, right: 30),
             child: AlertDialog(
                 title: Row(
-              children: const [
+              children: [
                 CircularProgressIndicator(
                   color: Colors.black,
                 ),
@@ -160,15 +160,16 @@ class _AddReportPageState extends State<AddReportPage> {
             .putFile(imageFile);
         imageURL = await firebase_storage.FirebaseStorage.instance
             .ref('Evidences/$fileName')
-            .getDownloadURL();
+            .getDownloadURL()
+            .whenComplete(() {
+          Navigator.of(context).pop();
+        });
 
         evidences.add(imageURL);
         showToast(
             '${evidences.length} images are uploaded. You can upload multiple images');
 
         setState(() {});
-
-        Navigator.of(context).pop();
       } on firebase_storage.FirebaseException catch (error) {
         if (kDebugMode) {
           print(error);
