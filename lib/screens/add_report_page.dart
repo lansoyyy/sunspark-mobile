@@ -6,7 +6,7 @@ import 'package:flutter_sms/flutter_sms.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:sunspark/screens/auth/landing_screen.dart';
+import 'package:sunspark/screens/new_page.dart';
 import 'package:sunspark/services/add_report.dart';
 import 'package:sunspark/widgets/button_widget.dart';
 import 'package:sunspark/widgets/text_widget.dart';
@@ -622,7 +622,7 @@ class _AddReportPageState extends State<AddReportPage> {
                                                             MaterialPageRoute(
                                                                 builder:
                                                                     (context) =>
-                                                                        const LandingScreen()));
+                                                                        const NewPage()));
                                                   },
                                                   child: TextRegular(
                                                       text: 'Close',

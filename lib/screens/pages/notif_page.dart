@@ -44,6 +44,7 @@ class _NotifScreenState extends State<NotifScreen> {
                 stream: FirebaseFirestore.instance
                     .collection('Reports')
                     .where('status', isEqualTo: 'Processing')
+                    .orderBy('dateTime', descending: true)
                     .snapshots(),
                 builder: (BuildContext context,
                     AsyncSnapshot<QuerySnapshot> snapshot) {
