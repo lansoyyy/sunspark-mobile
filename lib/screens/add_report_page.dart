@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_sms/flutter_sms.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
@@ -17,6 +16,7 @@ import 'package:path/path.dart' as path;
 import 'dart:io';
 
 import 'package:sunspark/widgets/toast_widget.dart';
+import 'package:telephony/telephony.dart';
 
 import 'citizen_screen.dart';
 
@@ -45,6 +45,8 @@ class _AddReportPageState extends State<AddReportPage> {
 
   final statementController = TextEditingController();
   final othersController = TextEditingController();
+
+  final Telephony telephony = Telephony.instance;
 
   List<String> type1 = [
     'Theft',
@@ -649,12 +651,7 @@ class _AddReportPageState extends State<AddReportPage> {
   }
 
   void _sendSMS(String message) async {
-    String result = await sendSMS(
-            message: message, recipients: ['+639615381873'], sendDirect: true)
-        .catchError((onError) {
-      print(onError);
-    });
-    print(result);
+    await telephony.sendSms(to: '+639615381873', message: message);
   }
 
   Future<void> _selectDateTime(BuildContext context) async {

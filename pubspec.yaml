@@ -45,6 +45,7 @@ dependencies:
   geolocator: ^9.0.2
   image_picker:
   flutter_sms:
+  telephony:
 
 dev_dependencies:
   flutter_test:
